@@ -1,0 +1,12 @@
+# 编译产物：.build 里的调试版带着本机路径，体积也大
+.build/
+build/
+# 安装包放 GitHub Release，不进仓库
+dist/
+.swiftpm/
+*.xcodeproj/
+xcuserdata/
+DerivedData/
+
+# macOS
+.DS_Store
