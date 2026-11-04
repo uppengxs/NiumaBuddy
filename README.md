@@ -2,6 +2,15 @@
 
 常驻菜单栏的「工资计价器」：今日已赚金额实时跳动，点开能看到下班倒计时、当日时间轴和心愿进度。
 
+![四个桌宠：小铜板、浩浩、球球、薯条](docs/images/pets.png)
+
+<p align="center">
+  <img src="docs/images/dashboard-light.png" width="320" alt="面板（浅色）">
+  <img src="docs/images/dashboard-dark.png" width="320" alt="面板（深色）">
+</p>
+
+<p align="center"><sub>截图里的金额按月薪 3000 演示</sub></p>
+
 ## 功能
 
 - **菜单栏金额**：今日已赚常驻菜单栏（可在设置里改成只显示图标）
@@ -20,6 +29,40 @@
 - **假期倒计时**：「距离周末还有 3 天 2 小时 · 元旦还有 58 天」，没公布的年份按节日当天估
 - **健康提醒**：久坐提醒（连续坐满 60 分钟）、喝水提醒（上班时每 60 分钟）、下班提醒，都弹系统通知，桌宠也会伸懒腰、举杯喝水；通知里不写金额
 - **设置**：月薪、日薪折算方式（法定 21.75 天 / 本月实际工作日）、上下班和午休时间、工作日、登录时自动启动
+
+### 桌宠的全部动作
+
+每个形象都有 16 种状态，点开看：
+
+<details>
+<summary>小铜板</summary>
+
+![小铜板的全部动作](docs/images/gallery-coin.png)
+
+</details>
+
+<details>
+<summary>浩浩（布偶猫）</summary>
+
+![浩浩的全部动作](docs/images/gallery-haohao.png)
+
+</details>
+
+<details>
+<summary>球球（黑猫）</summary>
+
+![球球的全部动作](docs/images/gallery-qiuqiu.png)
+
+</details>
+
+<details>
+<summary>薯条（金渐层）</summary>
+
+![薯条的全部动作](docs/images/gallery-shutiao.png)
+
+</details>
+
+截图都由 App 自己生成：`.build/debug/NiumaBuddy --snapshot <目录>`，改了界面重新跑一遍再替换 `docs/images/` 里的图即可。
 
 ### 节假日数据
 

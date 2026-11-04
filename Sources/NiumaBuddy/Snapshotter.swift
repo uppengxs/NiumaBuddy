@@ -54,6 +54,7 @@ enum Snapshotter {
         // 黑猫在深色桌面上最容易看不清，单独出一张深色背景的
         render(PetGallery(skin: .qiuqiu, darkBackground: true), dark: false, to: dir.appendingPathComponent("13-qiuqiu-dark.png"))
         render(PetGallery(skin: .shutiao), dark: false, to: dir.appendingPathComponent("14-shutiao-gallery.png"))
+        render(PetLineup(), dark: false, to: dir.appendingPathComponent("15-lineup.png"))
         for skin in PetSkin.allCases {
             let ms = MainActor.assumeIsolated { frameCost(skin) }
             print("\(skin.name)每帧耗时 \(String(format: "%.2f", ms)) 毫秒")
@@ -157,6 +158,41 @@ private struct PetGallery: View {
         .background(LinearGradient(colors: darkBackground
                                        ? [Color(white: 0.11), Color(red: 0.14, green: 0.15, blue: 0.19)]
                                        : [Color(red: 0.32, green: 0.42, blue: 0.58), Color(red: 0.55, green: 0.48, blue: 0.62)],
+                                   startPoint: .topLeading, endPoint: .bottomTrailing))
+    }
+}
+
+/// README 顶部的合照：四个形象各摆一个姿势
+private struct PetLineup: View {
+    private static func state(_ activity: PetActivity, _ skin: PetSkin, _ edit: (inout PetRenderState) -> Void = { _ in }) -> PetRenderState {
+        var s = PetRenderState(activity: activity)
+        s.skin = skin
+        edit(&s)
+        return s
+    }
+
+    private let items: [(String, PetRenderState, String?)] = [
+        ("小铜板 · 上班蹦硬币", state(.working, .coin) { $0.coinPops = [0.45, 1.15]; $0.outfit = PetOutfit(prop: .cup); $0.talking = true }, "今天已经赚了 ¥84.48"),
+        ("浩浩 · 周末度假", state(.vacation, .haohao), nil),
+        ("球球 · 上班前打瞌睡", state(.sleeping, .qiuqiu), nil),
+        ("薯条 · 午休吃小鱼干", state(.eating, .shutiao), "开饭啦！小鱼干！"),
+    ]
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<items.count, id: \.self) { i in
+                VStack(spacing: 2) {
+                    PetComposite(state: items[i].1, t: 0.6, scale: 1, bubble: items[i].2)
+                    Text(items[i].0)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.white)
+                }
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 4)
+        .padding(.bottom, 14)
+        .background(LinearGradient(colors: [Color(red: 0.32, green: 0.42, blue: 0.58), Color(red: 0.55, green: 0.48, blue: 0.62)],
                                    startPoint: .topLeading, endPoint: .bottomTrailing))
     }
 }
